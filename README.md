@@ -1,24 +1,63 @@
-# project-oo1
+# Transcom Business Intelligence
 
-## Project setup
-```
-npm install
-```
+An in house Business Intelligence tools.
 
-### Compiles and hot-reloads for development
-```
+## Installation
+
+### Step 1  
+Run 
+```bash
 npm run serve
+``` 
+### Step 2  
+Open 
+  [http://localhost:8081/](http://localhost:8081/)
+or [http://10.168.12.217:8081/](http://10.168.12.217:8081/) to view the project
+
+
+
+
+## Data Format
+### For Bar Chart and Line Chart
+
+We've used reusable custom chart components. The components require chartData as props.
+
+```javascript
+<LineChart :chartData="LineChartData" />
 ```
 
-### Compiles and minifies for production
+The data format is as below
+
+```javascript
+chartData: {
+        labels: [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+          
+        ],
+        datasets: [
+          {
+            label: 'Title of the Chart',
+            backgroundColor: '#F2506E',
+            data: [item 1 value, item 2 value, item 3 value,]
+          }
+        ]
+      },
 ```
-npm run build
+### For Pie Chart and Doughnut Chart
+```javascript
+chartData: {
+        label: 'Title for the chart',
+        labels: ['item 1', 'item 2 ', 'item 3', ],
+        datasets: [
+          {
+            backgroundColor: ['item 1 color',  'item 2 color', 'item 3 color'],
+            data: [item 1 value,  item 2 value, item 3 value,]
+          }
+        ]
+      },
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
