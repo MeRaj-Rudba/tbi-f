@@ -66,32 +66,27 @@ export default {
   methods: {
     generateSalesByShopName() {
       axios
-        .get('http://127.0.0.1:8000/api/sales/sales-by-shop')
+        .get('http://127.0.0.1:8000/api/sales/sales-by-shop', {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+          }
+        })
         .then(response => {
 
 
           this.salesByShop = response.data;
-          let salesByShopData = {
-            labels: [],
-            datasets: [
-              {
-                label: `Today's Brand Wise Sales (In Lac)`,
-                backgroundColor: '#50F296',
-                data: []
-              }
-            ]
-          }
+
 
           for (let index = 0; index < this.salesByShop.length; index++) {
 
             const shop_name = this.salesByShop[index].shop_name;
             const amount = this.salesByShop[index].amount;
-            salesByShopData.labels.push(shop_name)
-            salesByShopData.datasets[0].data.push(amount)
+            this.salesByShopData.labels.push(shop_name)
+            this.salesByShopData.datasets[0].data.push(amount)
 
 
           }
-          this.salesByShopData = salesByShopData
+
 
         }).catch(err => console.log(err));
 
@@ -105,7 +100,16 @@ export default {
       monthlyTrends: 58,
 
       salesByShop: null,
-      salesByShopData: {},
+      salesByShopData: {
+        labels: [],
+        datasets: [
+          {
+            label: `Today's Brand Wise Sales (In Lac)`,
+            backgroundColor: '#50F296',
+            data: []
+          }
+        ]
+      },
     }
   },
 

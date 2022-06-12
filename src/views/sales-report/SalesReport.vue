@@ -43,96 +43,79 @@ export default {
 
     generateSalesByShopName() {
       axios
-        .get('http://127.0.0.1:8000/api/sales/sales-by-shop')
+        .get('http://127.0.0.1:8000/api/sales/sales-by-shop', {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+          }
+        })
         .then(response => {
 
 
           this.salesByShop = response.data;
-          let salesByShopData = {
-            labels: [],
-            datasets: [
-              {
-                label: `Today's Brand Wise Sales (In Lac)`,
-                backgroundColor: '#55B3D9',
-                data: []
-              }
-            ]
-          }
+
 
           for (let index = 0; index < this.salesByShop.length; index++) {
 
             const shop_name = this.salesByShop[index].shop_name;
             const amount = this.salesByShop[index].amount;
-            salesByShopData.labels.push(shop_name)
-            salesByShopData.datasets[0].data.push(amount)
+            this.salesByShopData.labels.push(shop_name)
+            this.salesByShopData.datasets[0].data.push(amount)
 
 
           }
-          this.salesByShopData = salesByShopData
+
 
         }).catch(err => console.log(err));
 
     },
     generateSalesByBrandAmount() {
       axios
-        .get('http://127.0.0.1:8000/api/sales/sales-by-product-amount')
+        .get('http://127.0.0.1:8000/api/sales/sales-by-product-amount', {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+          }
+        })
         .then(response => {
 
 
           this.salesByBrandAmount = response.data;
-          let salesByBrandAmountData = {
-            labels: [],
-            datasets: [
-              {
-                label: `Today's SKU Wise Sales (In Lac)`,
-                backgroundColor: '#F2AE2E',
-                data: []
-              }
-            ]
-          }
+
 
           for (let index = 0; index < this.salesByBrandAmount.length; index++) {
 
             const product_name = this.salesByBrandAmount[index].product_name;
             const amount = this.salesByBrandAmount[index].amount;
-            salesByBrandAmountData.labels.push(product_name)
-            salesByBrandAmountData.datasets[0].data.push(amount)
+            this.salesByBrandAmountData.labels.push(product_name)
+            this.salesByBrandAmountData.datasets[0].data.push(amount)
 
 
           }
-          this.salesByBrandAmountData = salesByBrandAmountData
 
         }).catch(err => console.log(err));
 
     },
     generateSalesByBrandQty() {
       axios
-        .get('http://127.0.0.1:8000/api/sales/sales-by-product-qty')
+        .get('http://127.0.0.1:8000/api/sales/sales-by-product-qty', {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+          }
+        })
         .then(response => {
 
 
           this.salesByBrandQty = response.data;
-          let salesByBrandQtyData = {
-            labels: [],
-            datasets: [
-              {
-                label: `Today's SKU Wise Sales (In QTY)`,
-                backgroundColor: '#2CBF6C',
-                data: []
-              }
-            ]
-          }
 
           for (let index = 0; index < this.salesByBrandQty.length; index++) {
 
             const product_name = this.salesByBrandQty[index].product_name;
             const qty = this.salesByBrandQty[index].qty;
-            salesByBrandQtyData.labels.push(product_name)
-            salesByBrandQtyData.datasets[0].data.push(qty)
+            this.salesByBrandQtyData.labels.push(product_name)
+            this.salesByBrandQtyData.datasets[0].data.push(qty)
 
 
           }
-          this.salesByBrandQtyData = salesByBrandQtyData
+
 
         }).catch(err => console.log(err));
 
@@ -149,9 +132,36 @@ export default {
       salesByShop: null,
       salesByBrandAmount: null,
       salesByBrandQty: null,
-      salesByShopData: {},
-      salesByBrandAmountData: {},
-      salesByBrandQtyData: {},
+      salesByShopData: {
+        labels: [],
+        datasets: [
+          {
+            label: `Today's Brand Wise Sales (In Lac)`,
+            backgroundColor: '#55B3D9',
+            data: []
+          }
+        ]
+      },
+      salesByBrandAmountData: {
+        labels: [],
+        datasets: [
+          {
+            label: `Today's SKU Wise Sales (In Lac)`,
+            backgroundColor: '#F2AE2E',
+            data: []
+          }
+        ]
+      },
+      salesByBrandQtyData: {
+        labels: [],
+        datasets: [
+          {
+            label: `Today's SKU Wise Sales (In QTY)`,
+            backgroundColor: '#2CBF6C',
+            data: []
+          }
+        ]
+      },
     }
   },
 
