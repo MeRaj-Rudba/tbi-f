@@ -18,7 +18,7 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <a-input size="large" v-model="formData.email" placeholder="email"
+                                            <a-input size="large" v-model="formData.name" placeholder="email"
                                                 allowClear />
                                         </div>
                                         <div class="form-group">
@@ -54,7 +54,7 @@ export default {
         return {
             loading: false,
             formData: {
-                email: 'admin@test.com',
+                name: 'Admin',
                 password: '123456'
             },
             userInfo: '',
@@ -72,7 +72,7 @@ export default {
             // this.$router.go({ name: "Dashboard" });
 
             axios.post('login', {
-                email: _that.formData.email,
+                name: _that.formData.name,
                 password: _that.formData.password,
             }).then(function (response) {
                 if (response.data.status === 'success') {
