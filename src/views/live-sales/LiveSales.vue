@@ -39,7 +39,7 @@
 
     <b-card class="mt-3">
       <h3>Today's Brand Wise Sales (In Lac)</h3>
-      <input type="color" id="favcolor" name="favcolor" v-model="salesByShopData.datasets[0].backgroundColor">
+      <input type="color" v-model="salesByShopData.datasets[0].backgroundColor">
       <BarChart :chartData="salesByShopData" />
     </b-card>
 

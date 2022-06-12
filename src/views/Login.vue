@@ -18,7 +18,7 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <a-input size="large" v-model="formData.username" placeholder="username"
+                                            <a-input size="large" v-model="formData.email" placeholder="email"
                                                 allowClear />
                                         </div>
                                         <div class="form-group">
@@ -54,7 +54,7 @@ export default {
         return {
             loading: false,
             formData: {
-                username: 'admin',
+                email: 'admin@test.com',
                 password: '123456'
             },
             userInfo: '',
@@ -65,36 +65,38 @@ export default {
 
     methods: {
         userLogin() {
-            console.log('hello');
-            localStorage.setItem('authToken', "DemoAuthToken");
-            this.$router.go({ name: "Dashboard" });
 
-            // axios.post('login', {
-            //     username: _that.formData.username,
-            //     password: _that.formData.password,
-            // }).then(function (response) {
-            //     if (response.data.status === 200) {
-            //         _that.loading = false;
-            //         _that.token = response.data.token;
-            //         _that.userInfo = response.data.user_info;
-            //         _that.userInfo.roles.map(item => {
-            //             _that.userPermission = _that.userPermission.concat(item.permissions)
-            //         })
-            //         _that.userPermission = _that.userPermission.concat(_that.userInfo.permissions);
-            //         _that.userPermission = _that.uniqueArray(_that.userPermission)
-            //         //setting token, user info & permission in local memory
-            //         localStorage.setItem('authToken', _that.token);
-            //         localStorage.setItem('userInformation', JSON.stringify(_that.userInfo));
-            //         localStorage.setItem('userPermissions', JSON.stringify(_that.userPermission));
-            //         _that.$router.go({ name: 'Dashboard' });
-            //     } else if (response.data.status === 453) {
-            //         _that.loading = false;
-            //         _that.$message.error(response.data.messages, 3);
-            //     } else {
-            //         _that.loading = false;
-            //         _that.$message.error(response.data.messages, 3);
-            //     }
-            // })
+            let _that = this;
+            _that.loading = true;
+            // localStorage.setItem('authToken', "DemoAuthToken");
+            // this.$router.go({ name: "Dashboard" });
+
+            axios.post('login', {
+                email: _that.formData.email,
+                password: _that.formData.password,
+            }).then(function (response) {
+                if (response.data.status === 'success') {
+                    _that.loading = false;
+                    _that.token = response.data.authorisation.token;
+                    _that.userInfo = response.data.user;
+                    // _that.userInfo.roles.map(item => {
+                    //     _that.userPermission = _that.userPermission.concat(item.permissions)
+                    // })
+                    // _that.userPermission = _that.userPermission.concat(_that.userInfo.permissions);
+                    // _that.userPermission = _that.uniqueArray(_that.userPermission)
+                    //setting token, user info & permission in local memory
+                    localStorage.setItem('authToken', _that.token);
+                    localStorage.setItem('userInformation', JSON.stringify(_that.userInfo));
+                    // localStorage.setItem('userPermissions', JSON.stringify(_that.userPermission));
+                    _that.$router.go({ name: 'Dashboard' });
+                } else if (response.data.status === "error") {
+                    _that.loading = false;
+                    _that.$message.error(response.data.messages, 3);
+                } else {
+                    _that.loading = false;
+                    _that.$message.error(response.data.messages, 3);
+                }
+            })
         },
 
         uniqueArray(array) {

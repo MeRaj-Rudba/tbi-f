@@ -50,7 +50,7 @@ Vue.use(VueEllipseProgress);
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = "http://localhost/tcl-sfa/public/api/";
+axios.defaults.baseURL = "http://127.0.0.1:8000/api/";
 
 new Vue({
   router,

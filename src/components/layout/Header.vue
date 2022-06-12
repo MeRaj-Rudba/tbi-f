@@ -24,7 +24,7 @@
                         <!-- {{userInfo.username}} -->
 
                         <a-tooltip placement="left">
-                            <template #title>{{ userInfo.username }}</template>
+                            <template #title>{{ userInfo.name }}</template>
                             <div>
                                 <img src="@/assets/images/user.png" alt="Admin"
                                     style="width:40px !important;border-radius: 25px; opacity: .9" class="">
@@ -194,37 +194,31 @@ export default {
             this.$emit('child-sends-message', this.isBarsStatus)
         },
         userLogout() {
-            let _that = this;
-            localStorage.clear();
-            _that.$router.push({ name: 'Login' });
             // let _that = this;
-            // axios.post('users/logout',
-            //     {
-            //         id: _that.userInfo.id,
-            //         tokenId: localStorage.getItem('authToken')
-            //     },
-            //     {
-            //         headers: {
-            //             'Authorization': 'Bearer ' + localStorage.getItem('authToken')
-            //         }
-            //     }
-            // ).then(function (response) {
-            //     if (response.data.status === 200) {
-            //         localStorage.clear();
-            //         _that.$router.push({ name: 'Login' });
-            //     }
-            // }).catch((error) => {
-            //     localStorage.clear();
-            //     _that.$router.push({ name: 'Login' });
-            // });
+            // localStorage.clear();
+            // _that.$router.push({ name: 'Login' });
+
+            let _that = this;
+            axios.post('users/logout',
+
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('authToken')
+                    }
+                }
+            ).then(function (response) {
+                if (response.data.status === "success") {
+                    localStorage.clear();
+                    _that.$router.push({ name: 'Login' });
+                }
+            }).catch((error) => {
+                localStorage.clear();
+                _that.$router.push({ name: 'Login' });
+            });
         },
     },
     created() {
-        this.userInfo = {
-            username: "admin",
-            id: 13,
-            password: "123456"
-        };
+        this.userInfo = JSON.parse(localStorage.getItem("userInformation"));
     }
 }
 </script>
