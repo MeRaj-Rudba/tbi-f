@@ -72,7 +72,7 @@ export default {
             // this.$router.go({ name: "Dashboard" });
 
             axios.post('login', {
-                name: _that.formData.name,
+                username: _that.formData.name,
                 password: _that.formData.password,
             }).then(function (response) {
                 if (response.data.status === 'success') {

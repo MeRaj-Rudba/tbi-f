@@ -24,7 +24,7 @@
                         <!-- {{userInfo.username}} -->
 
                         <a-tooltip placement="left">
-                            <template #title>{{ userInfo.name }}</template>
+                            <template #title>{{ userInfo.username }}</template>
                             <div>
                                 <img src="@/assets/images/user.png" alt="Admin"
                                     style="width:40px !important;border-radius: 25px; opacity: .9" class="">
