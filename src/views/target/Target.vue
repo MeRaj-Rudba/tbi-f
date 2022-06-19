@@ -40,7 +40,7 @@
 
     </b-card-group>
     <b-card class="mt-3">
-
+      <h3>{{ salesByShopData.datasets[0].label }}</h3>
       <input type="color" id="favcolor" name="favcolor" v-model="salesByShopData.datasets[0].backgroundColor">
       <BarChart :chartData="salesByShopData" />
     </b-card>
@@ -104,7 +104,7 @@ export default {
         labels: [],
         datasets: [
           {
-            label: `Today's Brand Wise Sales (In Lac)`,
+            label: `Today's Shop Wise Sales (In Lac)`,
             backgroundColor: '#50F296',
             data: []
           }

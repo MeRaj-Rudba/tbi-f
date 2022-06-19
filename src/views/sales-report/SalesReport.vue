@@ -8,19 +8,19 @@
 
     </b-card>
     <b-card class="mt-3">
-      <h3>Today's Brand Wise Sales (In Lac)</h3>
+      <h3>{{ salesByBrandAmountData.datasets[0].label }}</h3>
       <input type="color" id="favcolor" name="favcolor" v-model="salesByBrandAmountData.datasets[0].backgroundColor">
 
       <BarChart :chartData="salesByBrandAmountData" />
     </b-card>
     <b-card class="mt-3">
-      <h3>Today's SKU Wise Sales (In QTY)</h3>
+      <h3>{{ salesByBrandQtyData.datasets[0].label }}</h3>
       <input type="color" id="favcolor" name="favcolor" v-model="salesByBrandQtyData.datasets[0].backgroundColor">
 
       <BarChart :chartData="salesByBrandQtyData" />
     </b-card>
     <b-card class="mt-3">
-      <h3>Today's SKU Wise Sales (In Lac)</h3>
+      <h3>{{ salesByBrandAmountData.datasets[0].label }}</h3>
       <input type="color" id="favcolor" name="favcolor" v-model="salesByBrandAmountData.datasets[0].backgroundColor">
 
       <BarChart :chartData="salesByBrandAmountData" />
